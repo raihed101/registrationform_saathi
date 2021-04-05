@@ -7,12 +7,14 @@ import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { withStyles } from "@material-ui/core/styles";
+import { Component } from 'react'
 import './index.css'
+import auth from './Auth'
 
 
-const useStyles = makeStyles((theme) => ({
+const styles = theme => ({
     paper: {
         marginTop: theme.spacing(8),
         display: 'flex',
@@ -35,95 +37,133 @@ const useStyles = makeStyles((theme) => ({
         color: 'red'
     }
 
-}));
+});
 
 
 
-export default function SignUp() {
+class SignUp extends Component {
+    constructor(props) {
+        super(props)
 
-    const classes = useStyles();
+        this.state = {
+            name: '',
+            email: '',
+            password: '',
+            redirect: false
 
-    return (
-        <Container component="main" maxWidth="xs" >
-            <CssBaseline />
-            <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                    Sign up
+        }
+        this.signup = this.signup.bind(this)
+        this.onChange = this.onChange.bind(this)
+
+    }
+    signup() {
+
+    }
+
+    onChange(e) {
+        this.setState({ [e.target.name]: e.target.value })
+        console.log(this.state)
+    }
+
+
+    render() {
+        const { classes } = this.props
+        return (
+            <Container component="main" maxWidth="xs" >
+                <CssBaseline />
+                <div className={classes.paper}>
+                    <Avatar className={classes.avatar}>
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        Sign up
         </Typography>
-                <form className={classes.form} noValidate>
-                    <Grid container spacing={2}>
+                    <form className={classes.form} noValidate>
+                        <Grid container spacing={2}>
 
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="name"
-                                label="Name"
-                                name="name"
-                                autoComplete="name"
-                            />
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="name"
+                                    label="Name"
+                                    name="name"
+                                    autoComplete="name"
+                                    onChange={this.onChange}
+
+                                />
 
 
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="email"
+                                    label="Email Address"
+                                    name="email"
+                                    autoComplete="email"
+                                    onChange={this.onChange}
+
+
+                                />
+
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    name="password"
+                                    label="Password"
+                                    type="password"
+                                    id="password"
+                                    autoComplete="current-password"
+                                    onChange={this.onChange}
+
+
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+
+                            </Grid>
                         </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="email"
-                                label="Email Address"
-                                name="email"
-                                autoComplete="email"
-
-                            />
-
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                name="password"
-                                label="Password"
-                                type="password"
-                                id="password"
-                                autoComplete="current-password"
-
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-
-                        </Grid>
-                    </Grid>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={null}
-                        style={{ boxShadow: 'none', backgroundColor: '#55a440' }}
-                    >
-                        Sign Up
+                        <Button
+                            onClick={() => {
+                                auth.signup(() => {
+                                    this.props.history.push('/home')
+                                })
+                            }}
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={null}
+                            style={{ boxShadow: 'none', backgroundColor: '#55a440' }}
+                        >
+                            Sign Up
           </Button>
-                    <Grid container justify="flex-end">
-                        <Grid item>
-                            <Link href="/signin" variant="body2">
-                                Already have an account? Sign in
+                        <Grid container justify="flex-end">
+                            <Grid item>
+                                <Link href="/signin" variant="body2">
+                                    Already have an account? Sign in
               </Link>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </form>
-            </div>
-            <Box mt={5}>
+                    </form>
+                </div>
+                <Box mt={5}>
 
-            </Box>
-        </Container >
-    );
+                </Box>
+            </Container >
+        );
 
+    }
 }
+
+export default withStyles(styles, { withTheme: true })(SignUp)
+
 
 
 

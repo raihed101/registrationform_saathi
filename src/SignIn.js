@@ -10,7 +10,9 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { Component } from 'react'
 import { withStyles } from "@material-ui/core/styles";
-import { PostData } from '../src/server/PostData'
+import auth from './Auth'
+// import { PostData } from '../src/server/PostData'
+// import { Redirect } from 'react-dom'
 
 
 const styles = theme => ({
@@ -55,7 +57,8 @@ class SignIn extends Component {
 
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            redirect: false
 
         }
         this.signin = this.signin.bind(this)
@@ -64,10 +67,15 @@ class SignIn extends Component {
     }
 
     signin() {
-        PostData('signin', this.state).then((result) => {
-            let responseJSON = result;
-            console.log(responseJSON)
-        })
+        // PostData('signin', this.state).then((result) => {
+        //     let responseJSON = result;
+        //     if (responseJSON.userData) {
+        //         sessionStorage.setItem('userData', responseJSON)
+        //         this.setState({ redirect: true })
+        //     } else {
+        //         console.log('Sign in error')
+        //     }
+        // })
     }
 
     onChange(e) {
@@ -77,6 +85,10 @@ class SignIn extends Component {
 
     render() {
         const { classes } = this.props
+
+        // if (this.state.redirect) {
+        //     return (<Redirect to={"/home"} />)
+        // }
 
         return (
             <Grid container component="main" className={classes.root}>
@@ -117,7 +129,11 @@ class SignIn extends Component {
                                 autoComplete="current-password" />
 
                             <Button
-                                onClick={this.signin}
+                                onClick={() => {
+                                    auth.signin(() => {
+                                        this.props.history.push('/home')
+                                    })
+                                }}
                                 type="submit"
                                 fullWidth
                                 variant="contained"
