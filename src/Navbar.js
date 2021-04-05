@@ -23,8 +23,8 @@ export default function ButtonAppBar() {
         <div className={classes.root}>
             <AppBar position="sticky" style={{ backgroundColor: '#55a440 ', boxShadow: 'none' }}>
                 <Toolbar>
-                    <Button color="inherit">Sign in</Button>
-                    <Button color="inherit">Sign up</Button>
+                    <Button href="/" color="inherit">Home</Button>
+                    {/* <Button color="inherit">Sign up</Button> */}
 
                 </Toolbar>
             </AppBar>

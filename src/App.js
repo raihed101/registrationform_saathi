@@ -3,11 +3,13 @@ import SignIn from './SignIn'
 import SignUp from './SignUp'
 import Home from './Home';
 import Navbar from './Navbar'
+import Welcome from './Welcome'
+import NotFound from './NotFound'
 import {
   BrowserRouter as Router,
-  // Switch,
+  Switch,
   Route,
-  // Link,
+
 
 } from "react-router-dom";
 
@@ -18,17 +20,14 @@ function App() {
 
     <Router>
       <Navbar />
-      <Route exact path="/" >
-        <SignUp />
-      </Route>
-      <Route exact path="/signin" >
-        <SignIn />
-      </Route>
-      <Route exact path="/home" >
-        <Home />
-      </Route>
-
-    </Router>
+      <Switch>
+        <Route exact path="/" component={Welcome} />
+        <Route path="/signin" component={SignIn} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/home" component={Home} />
+        <Route path="*" component={NotFound} />
+      </Switch>
+    </Router >
 
 
 
