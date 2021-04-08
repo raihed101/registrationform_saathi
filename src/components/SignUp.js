@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { withStyles } from "@material-ui/core/styles";
 import { Component } from 'react'
-import './index.css'
+// import '../styles/index.css';
 import auth from './Auth'
 
 

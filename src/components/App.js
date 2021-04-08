@@ -1,4 +1,4 @@
-import './index.css';
+// import '../index.css';
 import SignIn from './SignIn'
 import SignUp from './SignUp'
 import Home from './Home';
@@ -6,11 +6,8 @@ import Navbar from './Navbar'
 import Welcome from './Welcome'
 import NotFound from './NotFound'
 import {
-  BrowserRouter as Router,
-  Switch,
+  BrowserRouter as Router, Switch,
   Route,
-
-
 } from "react-router-dom";
 
 
